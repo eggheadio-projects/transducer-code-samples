@@ -1,34 +1,82 @@
+import {seq, compose, map, filter, timeIt, arrayofRandoms} from "../utils";
 import t from 'transducers.js';
 
-const doubleTheNumber = number => number * 2;
-export const evenOnly = number => number % 2 === 0;
+const isEven = val => val % 2 === 0;
+const tripleIt = val => val * 3;
+const arrOfMillion = arrayofRandoms(100)(1e6);
 
-const doubleAndEven = t.compose(
-  t.filter(evenOnly),
-  t.map(doubleTheNumber),
-);
+timeIt('million - chained', () => {
+  arrOfMillion
+    .map(tripleIt)
+    .filter(isEven);
+});
+timeIt('million - chained x2', () => {
+  arrOfMillion
+    .map(tripleIt)
+    .map(tripleIt)
+    .filter(isEven);
+});
+timeIt('million - chained x4', () => {
+  arrOfMillion
+    .map(tripleIt)
+    .map(tripleIt)
+    .map(tripleIt)
+    .map(tripleIt)
+    .filter(isEven);
+});
 
-const arr = [1,2,3,4,5,6,7,8,9,10];
-const res = t.seq(
-  t.iterator(arr),
-  t.compose(doubleAndEven, t.take(2)),
-);
+timeIt('million - imperative', () => {
+  const result = [];
+  arrOfMillion
+    .forEach(val => {
+      const tripled = tripleIt(val);
+      if (isEven(tripled)) result.push(tripled);
+    });
+});
 
-function* makeNumbers() {
-  let num = 1;
-  while (true) yield num++;
-}
+timeIt('million - transduce', () => {
+ seq(
+   compose(
+     map(tripleIt),
+     filter(isEven),
+   ),
+   arrOfMillion,
+ );
+});
 
-const lazyNums = t.seq(makeNumbers(), doubleAndEven);
+timeIt('million - transduce x2', () => {
+  seq(
+    compose(
+      map(tripleIt),
+      map(tripleIt),
+      filter(isEven),
+    ),
+    arrOfMillion,
+  );
+});
 
-console.log(
-  lazyNums.next(),
-  lazyNums.next(),
-  lazyNums.next(),
-  lazyNums.next(),
-  lazyNums.next(),
-  lazyNums.next(),
-)
+timeIt('million - transduce x4', () => {
+  seq(
+    compose(
+      map(tripleIt),
+      map(tripleIt),
+      map(tripleIt),
+      map(tripleIt),
+      filter(isEven),
+    ),
+    arrOfMillion,
+  );
+});
 
-
-
+timeIt('million - transduce lib', () => {
+  t.seq(
+    arrOfMillion,
+    t.compose(
+      t.map(tripleIt),
+      t.map(tripleIt),
+      t.map(tripleIt),
+      t.map(tripleIt),
+      t.filter(isEven),
+    ),
+  );
+});
