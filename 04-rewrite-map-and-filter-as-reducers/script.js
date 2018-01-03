@@ -1,8 +1,8 @@
 const doubleTheNumber = number => number * 2;
-[1,2,3,4].map(doubleTheNumber);
+console.log([1,2,3,4].map(doubleTheNumber));
 
 const doubleTwice = number => doubleTheNumber(doubleTheNumber(number));
-[1,2,3,4].map(doubleTwice);
+console.log([1,2,3,4].map(doubleTwice));
 
 const evenOnly = number => number % 2 === 0;
 
@@ -15,7 +15,7 @@ const map = (xf, array) => {
     }, []);
 }
 
-map(doubleTheNumber, [1,2,3,4]);
+console.log(map(doubleTheNumber, [1,2,3,4]));
 
 const filter = (predicate, array) => {
     return array.reduce((accumulation, value) => {
@@ -24,4 +24,4 @@ const filter = (predicate, array) => {
     }, []);
 };
 
-filter(evenOnly, [1,2,3,4]);
+console.log(filter(evenOnly, [1,2,3,4]));

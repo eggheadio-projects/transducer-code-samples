@@ -1,4 +1,7 @@
-import {doubleTheNumber, evenOnly} from "../utils";
+const evenOnly = number => number % 2 === 0;
+
+const doubleTheNumber = number => number * 2;
+
 
 const map = xf => reducer => {
   return (accumulation, value) => {
@@ -23,4 +26,4 @@ const pushReducer = (accumulation, value) => {
   return accumulation;
 };
 
-[1,2,3,4].reduce(isNot2Filter(isEvenFilter(doubleMap(pushReducer))), []);
+console.log([1,2,3,4].reduce(isNot2Filter(isEvenFilter(doubleMap(pushReducer))), []));

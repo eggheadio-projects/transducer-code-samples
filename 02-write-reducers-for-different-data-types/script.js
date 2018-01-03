@@ -5,11 +5,12 @@ const reducer = (accumulation, value) => {
     return accumulation + value;
 };
 
-reducer(10, 5);
-const res = reducer('hello', ' paul');
-reducer(res, ' again ');
+console.log(reducer(10, 5));
 
-[1,2,3,4,5].reduce(reducer, 0);
+const res = console.log(reducer('hello', ' paul'));
+console.log(reducer(res, ' again'));
+
+console.log([1,2,3,4,5].reduce(reducer, 0));
 
 const objReducer = (acc, obj) => {
     return {
@@ -23,11 +24,11 @@ const user = {
     email: 'paul@test.test',
 }
 
-objReducer(user, {nickname: 'Pauly D'});
+console.log(objReducer(user, {nickname: 'Pauly D'}));
 
 const setReducer = (acc, value) => {
     return acc.add(value);
 };
 
 const mySet = new Set([1,2,3,4]);
-setReducer(mySet, 4);
+console.log(setReducer(mySet, 4));

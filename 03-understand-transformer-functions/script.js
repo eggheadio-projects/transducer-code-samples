@@ -1,14 +1,16 @@
 const myString = 'hello';
 
-myString.toUpperCase();
+console.log(myString.toUpperCase());
 
 const toUpper = str => str.toUpperCase();
 
-toUpper(myString);
+console.log(toUpper(myString));
 
 const shout = str => `${str}!!`;
+console.log(shout(myString));
 
 const scream = str => toUpper(shout(str));
 shout('hello') === 'hello!!';
 
-scream(myString);
+console.log(scream(myString));
+

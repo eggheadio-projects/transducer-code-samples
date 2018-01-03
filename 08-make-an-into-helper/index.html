@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Plunker</title>
+      <script data-require="lodash.js@*" data-semver="2.4.1" src="https://unpkg.com/lodash@4.17.4/lodash.js"></script>
+  </head>
+<body>
+    <script>
+        // Allows Plunker to display logs in preview panel 
+        // for better in-browser experience
+         var originalConsoleLog = console.log
+         console.log = function () {
+           originalConsoleLog.apply(console, arguments)
+           var args = Array.prototype.slice.call(arguments);
+           document.body.innerText += args.join(' ') + '\n';
+           document.body.style['fontFamily'] = 'monospace';
+           document.body.style['fontSize'] = '2em';
+         };
+     </script>
+     <script src="utils.js"></script>
+     <script src="script.js"></script>
+
+  <canvas id="canvas" width="600" height="600"></canvas>
+</body>
+</html>
