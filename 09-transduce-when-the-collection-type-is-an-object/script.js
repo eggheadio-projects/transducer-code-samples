@@ -1,5 +1,4 @@
-import {isPlainObject, entries} from 'lodash';
-import {map, into} from '../utils';
+let {isPlainObject, entries} = _;
 
 let transduce = (xf /** could be composed **/, reducer, seed, _collection) => {
 
@@ -19,4 +18,4 @@ const objectValues = obj => {
     return into([], map(kv => kv[1]), obj);
 };
 
-objectValues({one: 1, two: 2});
+console.log(objectValues({one: 1, two: 2}));

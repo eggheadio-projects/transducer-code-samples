@@ -1,8 +1,3 @@
-const evenOnly = number => number % 2 === 0;
-
-const doubleTheNumber = number => number * 2;
-
-
 const map = xf => reducer => {
   return (accumulation, value) => {
     return reducer(accumulation, xf(value));

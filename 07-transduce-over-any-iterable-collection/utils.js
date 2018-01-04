@@ -32,7 +32,6 @@ const pushReducer = (accumulation, value) => {
     accumulation.push(value);
     return accumulation;
 };
-const toUpper = str => str.toUpperCase();
 const shout = str => `${str}!!`;
 const scream = str => toUpper(shout(str));
 
@@ -48,22 +47,6 @@ const into = (to, xf, collection) => {
     if (Array.isArray(to)) return transduce(xf, arrayReducer, to, collection);
     else if (isPlainObject(to)) return transduce(xf, objectReducer, to, collection);
     throw new Error('into only supports arrays and objects as `to`');
-};
-
-const transduce = (xf /** could be composed **/, reducer, seed, _collection) => {
-
-    // apply our reducer transform
-    const transformedReducer = xf(reducer);
-    // for every value, send the current value and the new total in, function returns a new total
-    let accumulation = seed;
-
-    const collection = isPlainObject(_collection) ? entries(_collection) : _collection;
-
-    for (let value of collection) {
-        accumulation = transformedReducer(accumulation, value); /*?*/
-    }
-
-    return accumulation;
 };
 
 const seq = (xf, collection) => {

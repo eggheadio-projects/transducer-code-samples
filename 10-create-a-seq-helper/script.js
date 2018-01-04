@@ -1,5 +1,4 @@
-import {isPlainObject} from 'lodash';
-import {compose, map, arrayReducer, objectReducer, transduce} from '../utils.js';
+let {isPlainObject, entries} = _;
 
 const into = (to, xf, collection) => {
   if (Array.isArray(to)) return transduce(xf, arrayReducer, to, collection);
@@ -13,10 +12,10 @@ const seq = (xf, collection) => {
   throw new Error('unsupported collection type');
 };
 
-seq(map(x => x*2), [1,2,3]);
+console.log(seq(map(x => x*2), [1,2,3]));
 
 const flip = compose(
   map(([k,v]) => ({[v*10]:k})),
 );
 
-seq(flip, {one: 1, two: 2, three: 3});
+console.log(seq(flip, {one: 1, two: 2, three: 3}));

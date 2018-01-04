@@ -1,7 +1,7 @@
-import t from 'transducers.js';
+let t = 'transducers.js';
 
 const doubleTheNumber = number => number * 2;
-export const evenOnly = number => number % 2 === 0;
+const evenOnly = number => number % 2 === 0;
 
 const doubleAndEven = t.compose(
   t.filter(evenOnly),

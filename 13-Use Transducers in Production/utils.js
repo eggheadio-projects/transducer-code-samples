@@ -25,9 +25,6 @@ const filter = predicate => reducer => {
     };
 };
 
-const evenOnly = number => number % 2 === 0;
-const doubleTheNumber = number => number * 2;
-const doubleAndEven = compose(map(doubleTheNumber), filter(evenOnly));
 const pushReducer = (accumulation, value) => {
     accumulation.push(value);
     return accumulation;

@@ -44,12 +44,6 @@ const arrayReducer = (array, value) => {
 // and our object reducer will perform a shallow merge with object.assign.
 const objectReducer = (obj, value) => Object.assign(obj, value);
 
-const into = (to, xf, collection) => {
-    if (Array.isArray(to)) return transduce(xf, arrayReducer, to, collection);
-    else if (isPlainObject(to)) return transduce(xf, objectReducer, to, collection);
-    throw new Error('into only supports arrays and objects as `to`');
-};
-
 const transduce = (xf /** could be composed **/, reducer, seed, _collection) => {
 
     // apply our reducer transform
@@ -64,16 +58,4 @@ const transduce = (xf /** could be composed **/, reducer, seed, _collection) => 
     }
 
     return accumulation;
-};
-
-const seq = (xf, collection) => {
-    if (Array.isArray(collection)) return transduce(xf, arrayReducer, [], collection);
-    // and for an object it will be an empty object
-    else if (isPlainObject(collection)) return transduce(xf, objectReducer, {}, collection);
-    else if (collection['@@transducer/step']) {
-        const init = collection['@@transducer/init'] ? collection['@@transducer/init']() : collection.constructor();
-        return transduce(xf, collection['@@transducer/step'], init, collection);
-
-    }
-    throw new Error('unsupported data type');
 };

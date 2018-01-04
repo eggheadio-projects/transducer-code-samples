@@ -1,5 +1,5 @@
-import {seq, compose, map, filter, timeIt, arrayofRandoms} from "../utils";
-import t from 'transducers.js';
+let {isPlainObject} = _; 
+let t = 'transducers.js';
 
 const isEven = val => val % 2 === 0;
 const tripleIt = val => val * 3;

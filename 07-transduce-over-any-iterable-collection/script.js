@@ -1,30 +1,3 @@
-const filter = predicate => reducer => {
-    return (accumulation, value) => {
-        if (predicate(value)) return reducer(accumulation, value);
-        return accumulation;
-    };
-};
-
-const map = xf => reducer => {
-    return (accumulation, value) => {
-        return reducer(accumulation, xf(value));
-    };
-};
-
-const evenOnly = number => number % 2 === 0;
-
-const doubleTheNumber = number => number * 2;
-
-const pushReducer = (accumulation, value) => {
-    accumulation.push(value);
-    return accumulation;
-};
-
-const compose = (...functions) =>
-    functions.reduce((accumulation, fn) =>
-        (...args) => accumulation(fn(...args)), x => x);
-
-
 const doubleMap = map(doubleTheNumber);
 const isEvenFilter = filter(evenOnly);
 const isNot2Filter = filter(val => val !== 2);

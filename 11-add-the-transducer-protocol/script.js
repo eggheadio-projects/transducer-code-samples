@@ -8,9 +8,8 @@
  * - implement protocol so that we can use seq with any structure
  */
 
-import {compose, transduce, objectReducer, arrayReducer, map, filter, doubleTheNumber, evenOnly} from "./utils";
-import {fromJS, List} from 'immutable';
-import {isPlainObject} from 'lodash';
+let {fromJS, List} = 'immutable';
+let {isPlainObject} = _;
 
 const doubleAndEven = compose(filter(evenOnly), map(doubleTheNumber));
 
@@ -39,6 +38,6 @@ const seq = (xf, collection) => {
 List.prototype['@@transducer/step'] = (list, value) => list.push(value);
 List.prototype['@@transducer/init'] = () => List();
 
-fromJS(into([], doubleAndEven, List([1, 2, 3, 4])));
-into(List(), doubleAndEven, [1, 2, 3, 4]);
-seq(doubleAndEven, List([1, 2, 3, 4]));
+console.log(fromJS(into([], doubleAndEven, List([1, 2, 3, 4]))));
+console.log(into(List(), doubleAndEven, [1, 2, 3, 4]));
+console.log(seq(doubleAndEven, List([1, 2, 3, 4])));

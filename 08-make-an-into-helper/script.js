@@ -1,5 +1,4 @@
-import {isPlainObject, isNumber} from 'lodash';
-import {compose, map, filter, pushReducer} from '../utils';
+let {isPlainObject, isNumber} = _;
 
 //current transduce
 const transduce = (xf /** could be composed **/, reducer, seed, collection) => {
@@ -20,17 +19,17 @@ const into = (to, xf, collection) => {
     throw new Error('into only supports arrays and objects as `to`');
 };
 
-into(
+console.log(into(
   [],
   compose(
     map(x => x/2),
     map(x => x * 10)
   ),
   [1,2,3,4],
-);
+));
 
-into(
+console.log(into(
   {},
   compose(filter(isNumber), map(val => ({[val]: val}))),
   [1,2,3,4, 'hello', () => 'world'],
-);
+));

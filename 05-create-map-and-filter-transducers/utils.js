@@ -12,26 +12,9 @@ const compose = (...functions) =>
     functions.reduce((accumulation, fn) =>
         (...args) => accumulation(fn(...args)), x => x);
 
-const map = xf => reducer => {
-    return (accumulation, value) => {
-        return reducer(accumulation, xf(value));
-    };
-};
-
-const filter = predicate => reducer => {
-    return (accumulation, value) => {
-        if (predicate(value)) return reducer(accumulation, value);
-        return accumulation;
-    };
-};
 
 const evenOnly = number => number % 2 === 0;
 const doubleTheNumber = number => number * 2;
-const doubleAndEven = compose(map(doubleTheNumber), filter(evenOnly));
-const pushReducer = (accumulation, value) => {
-    accumulation.push(value);
-    return accumulation;
-};
 const toUpper = str => str.toUpperCase();
 const shout = str => `${str}!!`;
 const scream = str => toUpper(shout(str));

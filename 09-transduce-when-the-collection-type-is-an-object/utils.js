@@ -50,22 +50,6 @@ const into = (to, xf, collection) => {
     throw new Error('into only supports arrays and objects as `to`');
 };
 
-const transduce = (xf /** could be composed **/, reducer, seed, _collection) => {
-
-    // apply our reducer transform
-    const transformedReducer = xf(reducer);
-    // for every value, send the current value and the new total in, function returns a new total
-    let accumulation = seed;
-
-    const collection = isPlainObject(_collection) ? entries(_collection) : _collection;
-
-    for (let value of collection) {
-        accumulation = transformedReducer(accumulation, value); /*?*/
-    }
-
-    return accumulation;
-};
-
 const seq = (xf, collection) => {
     if (Array.isArray(collection)) return transduce(xf, arrayReducer, [], collection);
     // and for an object it will be an empty object

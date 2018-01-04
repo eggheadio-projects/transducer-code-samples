@@ -8,9 +8,6 @@ const arrayofRandoms = randomCeil => length =>
   Array.from({length: length}, (v, i) =>
     Math.floor(Math.random() * randomCeil));
 
-const compose = (...functions) =>
-    functions.reduce((accumulation, fn) =>
-        (...args) => accumulation(fn(...args)), x => x);
 
 const map = xf => reducer => {
     return (accumulation, value) => {
@@ -27,11 +24,6 @@ const filter = predicate => reducer => {
 
 const evenOnly = number => number % 2 === 0;
 const doubleTheNumber = number => number * 2;
-const doubleAndEven = compose(map(doubleTheNumber), filter(evenOnly));
-const pushReducer = (accumulation, value) => {
-    accumulation.push(value);
-    return accumulation;
-};
 const toUpper = str => str.toUpperCase();
 const shout = str => `${str}!!`;
 const scream = str => toUpper(shout(str));
