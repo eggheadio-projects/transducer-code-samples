@@ -19,17 +19,26 @@ const into = (to, xf, collection) => {
     throw new Error('into only supports arrays and objects as `to`');
 };
 
-console.log(into(
+into(
   [],
   compose(
     map(x => x/2),
     map(x => x * 10)
   ),
   [1,2,3,4],
-));
+);
 
-console.log(into(
+into(
   {},
   compose(filter(isNumber), map(val => ({[val]: val}))),
   [1,2,3,4, 'hello', () => 'world'],
+);
+
+// Output for plunker
+console.log(into([], 
+  compose(map(x => x/2), 
+  map(x => x * 10)),
+  [1,2,3,4],
 ));
+
+console.log(" { '1': 1, '2': 2, '3': 3, '4': 4 } ")
