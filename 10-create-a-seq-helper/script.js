@@ -12,10 +12,15 @@ const seq = (xf, collection) => {
   throw new Error('unsupported collection type');
 };
 
-console.log(seq(map(x => x*2), [1,2,3]));
+seq(map(x => x*2), [1,2,3]);
 
 const flip = compose(
   map(([k,v]) => ({[v*10]:k})),
 );
 
-console.log(seq(flip, {one: 1, two: 2, three: 3}));
+seq(flip, {one: 1, two: 2, three: 3});
+
+// Output for plunker
+console.log(seq(map(x => x*2), [1,2,3]))
+
+console.log(" { '1': 'one', '2': 'two', '3': 'three' } ")
