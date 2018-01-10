@@ -8,7 +8,7 @@
  * - implement protocol so that we can use seq with any structure
  */
 
-let {fromJS, List} = 'immutable';
+let {fromJS, List} = Immutable;
 let {isPlainObject} = _;
 
 const doubleAndEven = compose(filter(evenOnly), map(doubleTheNumber));
