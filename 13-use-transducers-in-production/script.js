@@ -1,4 +1,4 @@
-let {t} = 'transducers.js';
+let t = transducers;
 
 const doubleTheNumber = number => number * 2;
 const evenOnly = number => number % 2 === 0;

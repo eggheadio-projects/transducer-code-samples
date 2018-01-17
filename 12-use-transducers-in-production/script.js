@@ -1,5 +1,5 @@
 let {isPlainObject} = _; 
-let {t} = 'transducers.js';
+let t = transducers;
 
 const isEven = val => val % 2 === 0;
 const tripleIt = val => val * 3;
